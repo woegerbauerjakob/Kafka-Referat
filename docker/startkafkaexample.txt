@@ -1,0 +1,11 @@
+sudo docker-compose up
+
+
+sudo docker exec -it kafka /bin/sh
+
+cd opt/kafka
+
+./bin/kafka-topics.sh --create --topic words-to-count --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1
+./bin/kafka-topics.sh --create --topic words-counted --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1
+
+./bin/kafka-console-consumer.sh --from-beginning --bootstrap-server localhost:9092 --topic words-counted

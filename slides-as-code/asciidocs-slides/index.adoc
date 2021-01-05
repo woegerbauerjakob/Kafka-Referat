@@ -1,0 +1,80 @@
+= Messaging
+Jakob Wögerbauer
+1.0, 2020-12-06
+ifndef::sourcedir[:sourcedir: ../src/main/java]
+ifndef::imagesdir[:imagesdir: images]
+ifndef::backend[:backend: html5]
+:icons: font
+
+== What is Messaging
+
+* How services and programs communicate
+* Observer Pattern
+* Publish Subscribe Pattern
+* Message Queues
+* Reactive Programing
+
+=== Publish Subscribe Pattern
+
+image::pubsubvsobserver.jpeg[]
+
+=== Message Queues
+
+image::message-queue01.png[]
+
+=== Message Queues
+
+image::message-queue02.png[width="700px"]
+
+=== Messaging in Quarkus
+
+[plantuml,jenkins,png]
+----
+@startuml
+rectangle Producer
+queue Kafka{
+    storage MQKafka
+}
+rectangle Converter
+storage MQQuarkus
+rectangle View
+Producer -> MQKafka
+MQKafka -> Converter
+Converter -> MQQuarkus
+MQQuarkus -> View
+
+@enduml
+----
+=== Reactive Programing
+
+image::Reactive01.png[]
+
+=== Reactive Programing
+
+image::Reactive02.png[]
+
+== Kafka
+
+image::Reactive02.png[]
+
+== Kafka vs Mosquitto
+
+* Kafka:
+** easy and highly scalable
+** developed for big systems
+* Mosquitto:
+** lightweight protocol
+** designed for IoT projects
+
+== Sources
+
+* https://hackernoon.com/observer-vs-pub-sub-pattern-50d3b27f838c
+* https://www.youtube.com/watch?v=O1PgqUqZKTA
+* https://github.com/wurstmeister/kafka-docker/issues/587
+* https://medium.com/big-data-engineering/hello-kafka-world-the-complete-guide-to-kafka-with-docker-and-python-f788e2588cfc
+* https://github.com/wurstmeister/kafka-docker
+* https://kafka.apache.org/
+* https://youtu.be/PzPXRmVHMxI
+* https://youtu.be/06iRM1Ghr1k
+
+== Danke für eure Aufmerksamkeit

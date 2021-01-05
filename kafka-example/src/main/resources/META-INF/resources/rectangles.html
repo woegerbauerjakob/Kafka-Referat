@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rectangles</title>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
+</head>
+<body>
+
+
+<canvas id="DrawField" width="1000" height="1000"></canvas>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    var canvas = document.getElementById('DrawField')
+    var source = new EventSource("/rectangles/stream");
+    console.log(source)
+
+    source.onmessage = function (event) {
+        //document.getElementById("contenerHTMt").innL = event.data;
+        console.log("got message")
+        console.log(event.data)
+        var arr = JSON.parse(event.data)
+        arr.forEach(x =>{
+            var context = canvas.getContext("2d")
+            context.beginPath()
+            context.moveTo(x.start.x*10, x.start.y*10)
+            context.lineTo(x.end.x*10, x.end.y*10)
+            context.lineWidth = 3
+            context.stroke();
+            setTimeout(()=>{},1000)
+        })
+    };
+</script>
+</html>
